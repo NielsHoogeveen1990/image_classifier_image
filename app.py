@@ -60,6 +60,15 @@ def verify_credentials(username, password):
     return None, False
 
 
+class Welcome(Resource):
+    def get(self):
+        retJson = {
+            "status": 200,
+            "message": "Welcome to the image classifier API."
+        }
+        return jsonify(retJson)
+
+
 class Register(Resource):
     def post(self):
         posted_data = request.get_json()
@@ -156,6 +165,7 @@ class Refill(Resource):
         return jsonify(generate_return_dict(200, "Refilled successfully."))
 
 
+api.add_resource(Welcome, '/welcome')
 api.add_resource(Register, '/register')
 api.add_resource(Classify, '/classify')
 api.add_resource(Refill, '/refill')
